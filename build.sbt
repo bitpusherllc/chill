@@ -9,13 +9,13 @@ val scroogeVersion = "4.12.0"
 
 val sharedSettings = mimaDefaultSettings ++ scalariformSettings ++ Seq(
   organization := "com.twitter",
-  scalaVersion := "2.11.12",
-  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6"),
+  scalaVersion := "2.12.8",
+  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.8"),
   scalacOptions ++= Seq("-unchecked", "-deprecation"),
   ScalariformKeys.preferences := formattingPreferences,
 
   // Twitter Hadoop needs this, sorry 1.7 fans
-  javacOptions ++= Seq("-target", "1.6", "-source", "1.6", "-Xlint:-options"),
+  javacOptions ++= Seq("-target", "1.8", "-source", "1.6", "-Xlint:-options"),
   javacOptions in doc := Seq("-source", "1.6"),
 
   resolvers ++= Seq(
@@ -54,7 +54,7 @@ val sharedSettings = mimaDefaultSettings ++ scalariformSettings ++ Seq(
       if (version.value.trim.toUpperCase.endsWith("SNAPSHOT"))
         Opts.resolver.sonatypeSnapshots
       else
-        Opts.resolver.sonatypeStaging
+        Resolver.file("file",  new File( "/home/ec2-user/m2" ))
     ),
   scmInfo := Some(
     ScmInfo(
